@@ -10,9 +10,9 @@ public class ThrowUtils {
      *
      * @param msg 异常信息
      * @param e   原异常
-     * @throws Throwable 异常，供外层捕获
+     * @throws XcoriaException 异常，供外层捕获
      */
-    public static void rethrow(String msg, Throwable e) throws Throwable {
+    public static void rethrow(String msg, Throwable e) throws XcoriaException {
         XcoriaException xc = null;
         if (e instanceof XcoriaException) {
             xc = (XcoriaException) e;
