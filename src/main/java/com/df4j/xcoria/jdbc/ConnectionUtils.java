@@ -169,6 +169,34 @@ public class ConnectionUtils {
     }
 
     /**
+     * 设置事务的隔离级别
+     *
+     * @param connection
+     * @param level
+     */
+    public static void setTransactionIsolation(Connection connection, int level) {
+        try {
+            connection.setTransactionIsolation(level);
+        } catch (SQLException e) {
+            throw new XcoriaException("设置连接事务隔离失败,level: " + level, e);
+        }
+    }
+
+    /**
+     * 获取事务隔离级别
+     *
+     * @param connection
+     * @return
+     */
+    public static int getTransactionIsolation(Connection connection) {
+        try {
+            return connection.getTransactionIsolation();
+        } catch (SQLException e) {
+            throw new XcoriaException("获取连接事务隔离失败", e);
+        }
+    }
+
+    /**
      * 开启连接事务，并执行逻辑
      *
      * @param con    数据库连接
@@ -187,7 +215,7 @@ public class ConnectionUtils {
             return t;
         } catch (Exception e) {
             rollback(con);
-            throw new XcoriaException("执行", e);
+            throw new XcoriaException("在事务中执行失败", e);
         } finally {
             if (!autoCommit) {
                 setAutoCommit(con, false);
