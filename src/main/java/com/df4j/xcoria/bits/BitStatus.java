@@ -137,32 +137,4 @@ public class BitStatus {
             return String.format("bit: index: %d, flag: %b, key: %s", index, flag, key);
         }
     }
-
-    public static void main(String[] args) {
-        String[] keys = {
-                "KEY01",
-                "KEY02",
-                "KEY03",
-                "KEY04",
-                "KEY05",
-                "KEY06",
-                "KEY07",
-                "KEY08",
-                "KEY09",
-                "KEY10",
-                "KEY11",
-                "KEY12",
-                "KEY13",
-                "KEY14",
-                "KEY15",
-                "KEY16"
-        };
-        BitStatus status = new BitStatus(keys);
-        status.setStatus(keys[0], true);
-        status.setStatus(keys[1], true);
-        status.setStatus(keys[5], true);
-        status.setStatus(keys[15], true);
-        status.setStatus(keys[12], true);
-        status.stream().forEach(System.out::println);
-    }
 }
