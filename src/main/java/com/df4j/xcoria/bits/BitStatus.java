@@ -110,14 +110,14 @@ public class BitStatus {
         private final boolean flag;
         private final int index;
 
-        public static BitEntry of(final String key, final boolean flag, final int index) {
-            return new BitEntry(key, flag, index);
-        }
-
         public BitEntry(String key, boolean flag, int index) {
             this.key = key;
             this.flag = flag;
             this.index = index;
+        }
+
+        public static BitEntry of(final String key, final boolean flag, final int index) {
+            return new BitEntry(key, flag, index);
         }
 
         public String getKey() {

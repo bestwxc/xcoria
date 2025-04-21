@@ -2,7 +2,6 @@ package com.df4j.xcoria.test.bits;
 
 import com.df4j.xcoria.bits.BitStatus;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
