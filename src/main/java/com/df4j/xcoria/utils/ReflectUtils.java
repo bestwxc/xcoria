@@ -3,6 +3,7 @@ package com.df4j.xcoria.utils;
 import com.df4j.xcoria.exception.XcoriaException;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -171,4 +172,74 @@ public class ReflectUtils {
         } while (targetClass != null && targetClass != Object.class);
         return returnMethod;
     }
+
+    /**
+     * 设置指定字段
+     *
+     * @param field  字段
+     * @param target 目标对象
+     * @param value  目标值
+     */
+    public static void setField(Field field, Object target, Object value) {
+        try {
+            field.set(target, value);
+        } catch (Exception e) {
+            handleException(e);
+        }
+    }
+
+    /**
+     * 获取指定字段的值
+     *
+     * @param field  字段
+     * @param target 目标对象
+     * @return 字段值
+     */
+    public static Object getField(Field field, Object target) {
+        try {
+            return field.get(target);
+        } catch (Exception e) {
+            handleException(e);
+        }
+        throw new XcoriaException("非正常返回");
+    }
+
+    /**
+     * 调用指定方法
+     *
+     * @param method 方法
+     * @param target 目标对象
+     * @return 方法返回结果
+     */
+    public static Object invokeMethod(Method method, Object target) {
+        return invokeMethod(method, target, new Object[0]);
+    }
+
+    /**
+     * 调用指定方法
+     *
+     * @param method 方法
+     * @param target 目标对象
+     * @param args   方法参数
+     * @return 方法返回结果
+     */
+    public static Object invokeMethod(Method method, Object target, Object... args) {
+        try {
+            return method.invoke(target, args);
+        } catch (Exception e) {
+            handleException(e);
+        }
+        throw new XcoriaException("非正常返回");
+    }
+
+    private static void handleException(Throwable e) {
+        XcoriaException xe = null;
+        if (e instanceof XcoriaException) {
+            xe = (XcoriaException) e;
+        } else {
+            xe = new XcoriaException("反射出现错误,msg:" + e.getMessage(), e);
+        }
+        throw xe;
+    }
+
 }

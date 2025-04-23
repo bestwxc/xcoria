@@ -81,7 +81,43 @@ public class ReflectUtilsTest {
 
     @Test
     public void testTestFindMethod() {
-        Method method = ReflectUtils.findMethod(Student.class, "setName", new Class[] { String.class });
+        Method method = ReflectUtils.findMethod(Student.class, "setName", new Class[]{String.class});
         assertEquals(method.getName(), "setName");
+    }
+
+    @Test
+    public void testSetField() {
+        Student student = new Student();
+        Field field = ReflectUtils.findField(Student.class, "name");
+        field.setAccessible(true);
+        ReflectUtils.setField(field, student, "name1");
+        assertEquals(student.getName(), "name1");
+    }
+
+    @Test
+    public void testGetField() {
+        Student student = new Student();
+        student.setName("name1");
+        Field field = ReflectUtils.findField(Student.class, "name");
+        field.setAccessible(true);
+        String name = (String) ReflectUtils.getField(field, student);
+        assertEquals("name1", name);
+    }
+
+    @Test
+    public void testInvokeMethod() {
+        Student student = new Student();
+        student.setName("name1");
+        Method method = ReflectUtils.findMethod(Student.class, "getName");
+        String name = (String) ReflectUtils.invokeMethod(method, student);
+        assertEquals("name1", name);
+    }
+
+    @Test
+    public void testTestInvokeMethod() {
+        Student student = new Student();
+        Method method = ReflectUtils.findMethod(Student.class, "setName", new Class[]{String.class});
+        ReflectUtils.invokeMethod(method, student, "name1");
+        assertEquals("name1", student.getName());
     }
 }
