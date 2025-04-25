@@ -1,12 +1,13 @@
 package com.df4j.xcoria.test.bits;
 
 import com.df4j.xcoria.bits.BitStatus;
-import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.testng.Assert.*;
 
 public class BitStatusTest {
 
@@ -28,15 +29,15 @@ public class BitStatusTest {
             "KEY15",
             "KEY16"
     };
-    
-    private Integer[] indexes = {0,1,5,15,12};
+
+    private Integer[] indexes = {0, 1, 5, 15, 12};
 
     private BitStatus status;
 
     @BeforeTest
     public void beforeClass() {
         status = new BitStatus(keys);
-        for(int i : indexes) {
+        for (int i : indexes) {
             status.setStatus(keys[i], true);
         }
     }
@@ -44,23 +45,23 @@ public class BitStatusTest {
     @Test
     public void testSetStatus() {
         BitStatus newStatus = new BitStatus(keys);
-        for(int i = 0; i < keys.length; i++) {
+        for (int i = 0; i < keys.length; i++) {
             String key = keys[i];
             newStatus.setStatus(key, true);
-            Assert.assertTrue(newStatus.getStatus(key));
+            assertTrue(newStatus.getStatus(key));
             newStatus.setStatus(key, false);
-            Assert.assertFalse(newStatus.getStatus(key));
+            assertFalse(newStatus.getStatus(key));
         }
     }
 
     @Test
     public void testGetStatus() {
         List<Integer> list = Arrays.asList(indexes);
-        for(int i = 0; i < keys.length;i++) {
-            if(list.contains(i)) {
-                Assert.assertTrue(status.getStatus(keys[i]));
+        for (int i = 0; i < keys.length; i++) {
+            if (list.contains(i)) {
+                assertTrue(status.getStatus(keys[i]));
             } else {
-                Assert.assertFalse(status.getStatus(keys[i]));
+                assertFalse(status.getStatus(keys[i]));
             }
         }
     }
@@ -70,11 +71,11 @@ public class BitStatusTest {
         List<Integer> list = Arrays.asList(indexes);
         status.stream().forEach(x -> {
             int i = x.getIndex();
-            Assert.assertEquals(keys[i], x.getKey());
-            if(list.contains(i)) {
-                Assert.assertTrue(x.isFlag());
+            assertEquals(keys[i], x.getKey());
+            if (list.contains(i)) {
+                assertTrue(x.isFlag());
             } else {
-                Assert.assertFalse(x.isFlag());
+                assertFalse(x.isFlag());
             }
         });
     }

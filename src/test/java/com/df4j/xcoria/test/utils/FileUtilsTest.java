@@ -5,8 +5,8 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 
-import static org.testng.Assert.*;
 import static com.df4j.xcoria.utils.FileUtils.*;
+import static org.testng.Assert.*;
 
 public class FileUtilsTest {
 

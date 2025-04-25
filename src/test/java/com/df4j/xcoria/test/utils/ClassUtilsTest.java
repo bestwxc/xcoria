@@ -3,8 +3,8 @@ package com.df4j.xcoria.test.utils;
 import org.h2.Driver;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
 import static com.df4j.xcoria.utils.ClassUtils.*;
+import static org.testng.Assert.*;
 
 public class ClassUtilsTest {
 

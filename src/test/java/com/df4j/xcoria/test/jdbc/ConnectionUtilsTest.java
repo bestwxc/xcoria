@@ -1,9 +1,7 @@
 package com.df4j.xcoria.test.jdbc;
 
 import com.df4j.xcoria.jdbc.ConnectionUtils;
-import com.df4j.xcoria.test.utils.CloseUtilsTest;
 import com.df4j.xcoria.utils.CloseUtils;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
@@ -31,13 +29,13 @@ public class ConnectionUtilsTest {
             rs = stmt.executeQuery("select 2 from dual");
             rs.next();
             String v = rs.getString(1);
-            Assert.assertEquals(v, "2");
+            assertEquals(v, "2");
         } catch (Exception e) {
             t = e;
         } finally {
             CloseUtils.closeAll(rs, stmt, con);
         }
-        Assert.assertNull(t);
+        assertNull(t);
     }
 
     @Test
@@ -53,35 +51,35 @@ public class ConnectionUtilsTest {
             rs = stmt.executeQuery("select 2 from dual");
             rs.next();
             String v = rs.getString(1);
-            Assert.assertEquals(v, "2");
+            assertEquals(v, "2");
         } catch (Exception e) {
             t = e;
         } finally {
             CloseUtils.closeAll(rs, stmt, con);
         }
-        Assert.assertNull(t);
+        assertNull(t);
     }
 
     @Test
     public void testGetDriver() throws ClassNotFoundException {
         String driverClassName2 = "com.df4j.xcoria.test.jdbc.MyH2Driver";
         Driver driver = ConnectionUtils.getDriver(driverClassName2);
-        Assert.assertNotNull(driver);
-        Assert.assertEquals(driver.getClass().getName(), driverClassName2);
+        assertNotNull(driver);
+        assertEquals(driver.getClass().getName(), driverClassName2);
         Class.forName(driverClassName2);
         Driver driver2 = ConnectionUtils.getDriver(driverClassName2);
-        Assert.assertNotNull(driver2);
-        Assert.assertEquals(driver2.getClass().getName(), driverClassName2);
-        Assert.assertNotEquals(driver, driver2);
+        assertNotNull(driver2);
+        assertEquals(driver2.getClass().getName(), driverClassName2);
+        assertNotEquals(driver, driver2);
     }
 
     @Test
     public void testGetAndSetAutoCommit() {
         Connection con = ConnectionUtils.connect(driverClassName, jdbcUrl, username, null);
         ConnectionUtils.setAutoCommit(con, true);
-        Assert.assertTrue(ConnectionUtils.getAutoCommit(con));
+        assertTrue(ConnectionUtils.getAutoCommit(con));
         ConnectionUtils.setAutoCommit(con, false);
-        Assert.assertFalse(ConnectionUtils.getAutoCommit(con));
+        assertFalse(ConnectionUtils.getAutoCommit(con));
     }
 
     @Test
@@ -100,9 +98,9 @@ public class ConnectionUtilsTest {
     public void testSetAndGetTransactionIsolation() {
         Connection con = ConnectionUtils.connect(driverClassName, jdbcUrl, username, null);
         ConnectionUtils.setTransactionIsolation(con, 1);
-        Assert.assertEquals(ConnectionUtils.getTransactionIsolation(con), 1);
+        assertEquals(ConnectionUtils.getTransactionIsolation(con), 1);
         ConnectionUtils.setTransactionIsolation(con, 2);
-        Assert.assertEquals(ConnectionUtils.getTransactionIsolation(con), 2);
+        assertEquals(ConnectionUtils.getTransactionIsolation(con), 2);
     }
 
     @Test
@@ -120,6 +118,6 @@ public class ConnectionUtilsTest {
             }
             return v;
         });
-        Assert.assertEquals(res, "1");
+        assertEquals(res, "1");
     }
 }

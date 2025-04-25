@@ -9,9 +9,11 @@ import java.sql.SQLException;
 public class MyH2Driver extends Driver {
     private static final Driver INSTANCE = new MyH2Driver();
     private static boolean registered;
+
     static {
         load();
     }
+
     public static synchronized Driver load() {
         try {
             if (!registered) {

@@ -1,6 +1,6 @@
 package com.df4j.xcoria.exception;
 
-public class XcoriaException extends RuntimeException{
+public class XcoriaException extends RuntimeException {
 
     public XcoriaException() {
     }
